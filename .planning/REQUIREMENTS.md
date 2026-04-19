@@ -7,50 +7,50 @@
 
 ### Session
 
-- [ ] **SESS-01**: User can create a new game session and receive a 6-character join code and shareable link
-- [ ] **SESS-02**: User can join an existing session by entering a join code
-- [ ] **SESS-03**: User can join an existing session by opening a share link
-- [ ] **SESS-04**: User can enter a display name to identify themselves in the lobby (no account required)
-- [ ] **SESS-05**: All players in the lobby can see who has joined in real time (live presence)
-- [ ] **SESS-06**: First player to create a room is designated the host
-- [ ] **SESS-07**: User opening a link for an expired or non-existent room sees a clear error message
+- [x] **SESS-01**: User can create a new game session and receive a 6-character join code and shareable link
+- [x] **SESS-02**: User can join an existing session by entering a join code
+- [x] **SESS-03**: User can join an existing session by opening a share link
+- [x] **SESS-04**: User can enter a display name to identify themselves in the lobby (no account required)
+- [x] **SESS-05**: All players in the lobby can see who has joined in real time (live presence)
+- [x] **SESS-06**: First player to create a room is designated the host
+- [x] **SESS-07**: User opening a link for an expired or non-existent room sees a clear error message
 
 ### Lobby
 
-- [ ] **LOBB-01**: Players can submit words they expect to hear during the meeting
-- [ ] **LOBB-02**: Duplicate words (case-insensitive) are rejected with a clear message
-- [ ] **LOBB-03**: Players can remove words they personally submitted
-- [ ] **LOBB-04**: Host can choose from starter buzzword packs (Corporate Classics, Agile, Sales) to pre-seed the word pool
-- [ ] **LOBB-05**: Grid size is automatically derived from word count (3×3 for 5–11 words, 4×4 for 12–20 words, 5×5 for 21+ words)
-- [ ] **LOBB-06**: Host cannot start the game until the minimum word count for the selected grid is reached
-- [ ] **LOBB-07**: Host can start the game; non-hosts see a "waiting for host to start" state
+- [x] **LOBB-01**: Players can submit words they expect to hear during the meeting
+- [x] **LOBB-02**: Duplicate words (case-insensitive) are rejected with a clear message
+- [x] **LOBB-03**: Players can remove words they personally submitted
+- [x] **LOBB-04**: Host can choose from starter buzzword packs (Corporate Classics, Agile, Sales) to pre-seed the word pool
+- [x] **LOBB-05**: Grid size is automatically derived from word count (3×3 for 5–11 words, 4×4 for 12–20 words, 5×5 for 21+ words)
+- [x] **LOBB-06**: Host cannot start the game until the minimum word count for the selected grid is reached
+- [x] **LOBB-07**: Host can start the game; non-hosts see a "waiting for host to start" state
 
 ### Board
 
-- [ ] **BOAR-01**: Each player receives a uniquely generated bingo board upon game start
-- [ ] **BOAR-02**: Boards are generated server-side using cryptographic randomness (Fisher-Yates shuffle)
-- [ ] **BOAR-03**: Each player's board is private — only their own board layout is sent to them
-- [ ] **BOAR-04**: Blank spaces are distributed across the board to fill remaining cells (total cells minus word count)
-- [ ] **BOAR-05**: Player can click a word cell to mark it as called; cell shows a visual marked state
-- [ ] **BOAR-06**: Marked cells propagate to all players (peers see a mark count, not the board layout)
-- [ ] **BOAR-07**: Board is displayed responsively and usable on mobile (minimum 44px tap targets)
+- [x] **BOAR-01**: Each player receives a uniquely generated bingo board upon game start
+- [x] **BOAR-02**: Boards are generated server-side using cryptographic randomness (Fisher-Yates shuffle)
+- [x] **BOAR-03**: Each player's board is private — only their own board layout is sent to them
+- [x] **BOAR-04**: Blank spaces are distributed across the board to fill remaining cells (total cells minus word count)
+- [x] **BOAR-05**: Player can click a word cell to mark it as called; cell shows a visual marked state
+- [x] **BOAR-06**: Marked cells propagate to all players (peers see a mark count, not the board layout)
+- [x] **BOAR-07**: Board is displayed responsively and usable on mobile (minimum 44px tap targets)
 
 ### Win
 
-- [ ] **WIN-01**: Server checks for a completed line (row, column, or diagonal including blanks) after every mark
-- [ ] **WIN-02**: When a line is complete, server broadcasts the win to all players
-- [ ] **WIN-03**: Winning player sees a celebration state (confetti animation + "BINGO!" announcement)
-- [ ] **WIN-04**: All players see who won and which line completed
-- [ ] **WIN-05**: Host can start a new game from the end screen, resetting to lobby with the same players
+- [x] **WIN-01**: Server checks for a completed line (row, column, or diagonal including blanks) after every mark
+- [x] **WIN-02**: When a line is complete, server broadcasts the win to all players
+- [x] **WIN-03**: Winning player sees a celebration state (confetti animation + "BINGO!" announcement)
+- [x] **WIN-04**: All players see who won and which line completed
+- [x] **WIN-05**: Host can start a new game from the end screen, resetting to lobby with the same players
 
 ### Resilience
 
-- [ ] **RESI-01**: Player identity is stored in sessionStorage and decoupled from the WebSocket connection
-- [ ] **RESI-02**: Server holds a player's slot for 30–60 seconds after disconnection before removing them
-- [ ] **RESI-03**: Reconnecting player receives a full game state snapshot and resumes their session
-- [ ] **RESI-04**: UI shows a "reconnecting…" indicator when the WebSocket connection is lost
-- [ ] **RESI-05**: If the host disconnects, host role transfers to the next-longest-connected player
-- [ ] **RESI-06**: Game proactively resyncs state when the browser tab becomes visible again (visibilitychange)
+- [x] **RESI-01**: Player identity is stored in sessionStorage and decoupled from the WebSocket connection
+- [x] **RESI-02**: Server holds a player's slot for 30–60 seconds after disconnection before removing them
+- [x] **RESI-03**: Reconnecting player receives a full game state snapshot and resumes their session
+- [x] **RESI-04**: UI shows a "reconnecting…" indicator when the WebSocket connection is lost
+- [x] **RESI-05**: If the host disconnects, host role transfers to the next-longest-connected player
+- [x] **RESI-06**: Game proactively resyncs state when the browser tab becomes visible again (visibilitychange)
 
 ## v2 Requirements
 

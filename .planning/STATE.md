@@ -1,11 +1,11 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: milestone
-status: executing
-stopped_at: Phase 8 UI-SPEC approved
-last_updated: "2026-04-19T17:06:44.331Z"
-last_activity: 2026-04-19 -- Phase 1 planning complete
+milestone_name: v1.0 — Bullshit Bingo
+status: complete
+stopped_at: v1.0 shipped — all 8 phases complete, docs generated, CI green, 432 tests passing
+last_updated: "2026-04-19T18:00:00.000Z"
+last_activity: 2026-04-19 -- v1.0 milestone closed
 progress:
   total_phases: 8
   completed_phases: 8

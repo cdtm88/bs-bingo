@@ -12,12 +12,12 @@ Bullshit Bingo ships in six phases that each deliver a verifiable slice of the m
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation — Transport, Room, Lobby, Presence** — Anyone can create a room, share a code or link, and see who has joined in real time.
-- [ ] **Phase 2: Lobby Gameplay — Word Submission & Start** — Players can seed the word pool, the grid auto-sizes, and the host can start the game.
-- [ ] **Phase 3: Board Generation & Core Mark Loop** — Every player gets a private, fairly shuffled board and can mark words that other players see count updates for.
+- [x] **Phase 1: Foundation — Transport, Room, Lobby, Presence** — Anyone can create a room, share a code or link, and see who has joined in real time.
+- [x] **Phase 2: Lobby Gameplay — Word Submission & Start** — Players can seed the word pool, the grid auto-sizes, and the host can start the game.
+- [x] **Phase 3: Board Generation & Core Mark Loop** — Every player gets a private, fairly shuffled board and can mark words that other players see count updates for.
 - [x] **Phase 4: Win Detection, Announcement & Play-Again** — The server declares the winner, everyone sees the celebration, and the host can rematch with the same lobby.
-- [ ] **Phase 5: Resilience & Mobile Hardening** — Sessions survive phone locks, network drops, host disconnects, and tab-away meetings.
-- [ ] **Phase 6: UI Overhaul** — Dual-mode theming (SFW "Buzzword Bingo" default / NSFW "Bullshit Bingo" opt-in) with per-theme palette, copy, and classic bingo-card aesthetic.
+- [x] **Phase 5: Resilience & Mobile Hardening** — Sessions survive phone locks, network drops, host disconnects, and tab-away meetings.
+- [x] **Phase 6: UI Overhaul** — Dual-mode theming (SFW "Buzzword Bingo" default / NSFW "Bullshit Bingo" opt-in) with per-theme palette, copy, and classic bingo-card aesthetic.
 
 ## Phase Details
 
@@ -134,12 +134,17 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation — Transport, Room, Lobby, Presence | 0/5 | Not started | - |
-| 2. Lobby Gameplay — Word Submission & Start | 0/3 | Not started | - |
-| 3. Board Generation & Core Mark Loop | 0/4 | Not started | - |
-| 4. Win Detection, Announcement & Play-Again | 4/4 | Complete    | 2026-04-18 |
-| 5. Resilience & Mobile Hardening | 0/3 | Planned     | - |
-| 6. UI Overhaul | 0/4 | Planned     | - |
+| 1. Foundation — Transport, Room, Lobby, Presence | 5/5 | Complete | 2026-04-17 |
+| 2. Lobby Gameplay — Word Submission & Start | 3/3 | Complete | 2026-04-17 |
+| 3. Board Generation & Core Mark Loop | 4/4 | Complete | 2026-04-18 |
+| 4. Win Detection, Announcement & Play-Again | 4/4 | Complete | 2026-04-18 |
+| 5. Resilience & Mobile Hardening | 3/3 | Complete | 2026-04-18 |
+| 6. UI Overhaul | 4/4 | Complete | 2026-04-19 |
+| 7. Polish — logo, favicon, NSFW copy, dauber animation | 4/4 | Complete | 2026-04-19 |
+| 8. Bull logos, win/lose screens, copy dial-up | 4/4 | Complete | 2026-04-19 |
+| Docs, CI, test suite | — | Complete | 2026-04-19 |
+
+**v1.0 COMPLETE — 2026-04-19**
 
 ### Phase 7: Polish — logo, favicon, harder NSFW copy, paint dauber animation
 
@@ -149,9 +154,9 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 **Plans:** 4 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — Dual-mode Logo.svelte component + home hero + persistent compact header in layout with route guard (D-01/D-02/D-03)
+- [x] 07-01-PLAN.md — Dual-mode Logo.svelte component + home hero + persistent compact header in layout with route guard (D-01/D-02/D-03)
 - [x] 07-02-PLAN.md — Neutral static/favicon.svg + fix src/app.html link + Playwright spec (D-04/D-05)
-- [ ] 07-03-PLAN.md — Audit and rewrite mild NSFW strings in copy.ts to match "CALLED IT!" quality bar + update copy.test.ts (D-06/D-07/D-08/D-09)
+- [x] 07-03-PLAN.md — Audit and rewrite mild NSFW strings in copy.ts to match "CALLED IT!" quality bar + update copy.test.ts (D-06/D-07/D-08/D-09)
 - [x] 07-04-PLAN.md — Impact + Ink Bleed Ring dauber animation (app.css + BoardCell.svelte + BoardCell.test.ts + reduced-motion e2e spec) (D-10/D-11/D-12/D-13/D-14/D-15)
 
 ### Phase 8: Add logos to the bullshit versions home page, win page and lose page and dial up the language
