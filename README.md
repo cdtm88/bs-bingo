@@ -8,6 +8,10 @@
 Everyone gets a board. First to a line wins. No sign-up required.
 
 [![CI](https://github.com/cdtm88/bs-bingo/actions/workflows/ci.yml/badge.svg)](https://github.com/cdtm88/bs-bingo/actions/workflows/ci.yml)
+[![SvelteKit](https://img.shields.io/badge/SvelteKit-FF3E00?logo=svelte&logoColor=white)](https://kit.svelte.dev)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-F38020?logo=cloudflare&logoColor=white)](https://workers.cloudflare.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-0EA5E9?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
 </div>
 
