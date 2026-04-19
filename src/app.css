@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg:            #0F0F14;
+  --color-surface:       #1A1A23;
+  --color-divider:       #2A2A36;
+  --color-accent:        #F5D547;
+  --color-destructive:   #F87171;
+  --color-ink-primary:   #F5F5F7;
+  --color-ink-secondary: #A1A1AA;
+  --color-ink-disabled:  #52525B;
+  --color-ink-inverse:   #0F0F14;
+  --font-sans:    "Inter Variable", system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", sans-serif;
+}
+
+/* Phase 6 — NSFW palette override (CONTEXT D-08, D-12) */
+:root[data-theme="nsfw"] {
+  --color-bg:            #F5EDD6;
+  --color-surface:       #E8D9B0;
+  --color-divider:       #C9A96B;
+  --color-accent:        #D4520A;
+  --color-destructive:   #C0392B;
+  --color-ink-primary:   #2C1810;
+  --color-ink-secondary: #7A4F2A;
+  --color-ink-disabled:  #B8956A;
+  --color-ink-inverse:   #F5EDD6;
+  color-scheme: light;
+}
+
+/* Phase 6 — NSFW blank cell crosshatch (UI-SPEC line 226, RESEARCH lines 516-525) */
+:root[data-theme="nsfw"] .bingo-blank-cell {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0 8px,
+    var(--color-divider) 8px 9px
+  );
+  background-blend-mode: overlay;
+  opacity: 0.92;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-6px); }
+  80%       { transform: translateX(6px); }
+}
+
+.shake { animation: shake 300ms ease-in-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .shake { animation: none; }
+}
+
+@keyframes winLinePulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--color-accent), 0 0 8px  var(--color-accent); }
+  50%      { box-shadow: 0 0 0 2px var(--color-accent), 0 0 16px var(--color-accent); }
+}
+
+[data-win-line="true"] > button {
+  animation: winLinePulse 1200ms ease-in-out infinite;
+  border-radius: 0.5rem; /* match BoardCell's rounded-lg */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-win-line="true"] > button {
+    animation: none;
+    box-shadow: 0 0 0 2px var(--color-accent), 0 0 12px var(--color-accent);
+  }
+}
+
+/* Phase 7 — NSFW dauber Impact + Ink Bleed Ring (CONTEXT D-10, D-15) */
+@keyframes dauberStampIn {
+  0%   { transform: scale(0.5);  opacity: 0; }
+  60%  { transform: scale(1.08); opacity: 0.80; }
+  100% { transform: scale(1.0);  opacity: 0.72; }
+}
+
+@keyframes dauberBleed {
+  0%   { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.dauber-stamp {
+  animation: dauberStampIn 180ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.dauber-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0;
+  animation: dauberBleed 400ms 60ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dauber-stamp { animation: none; opacity: 0.72; }
+  .dauber-wrap::after { animation: none; }
+}

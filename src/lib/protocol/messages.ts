@@ -1,0 +1,145 @@
+import * as v from "valibot";
+
+export const Player = v.object({
+  playerId: v.pipe(v.string(), v.minLength(1)),
+  displayName: v.pipe(v.string(), v.minLength(1), v.maxLength(20)),
+  isHost: v.boolean(),
+  joinedAt: v.number(),
+});
+export type Player = v.InferOutput<typeof Player>;
+
+export const WordEntry = v.object({
+  wordId: v.string(),
+  text: v.string(),
+  submittedBy: v.string(), // playerId (host's id for pack words)
+});
+export type WordEntry = v.InferOutput<typeof WordEntry>;
+
+// --- Phase 3: per-cell payload for boardAssigned (BOAR-01..04) ---
+// BoardCell is never broadcast in RoomState — it travels only in the per-player
+// boardAssigned ServerMessage (BOAR-03 privacy).
+export const BoardCell = v.object({
+  cellId: v.string(),
+  wordId: v.nullable(v.string()),
+  text: v.nullable(v.string()),
+  blank: v.boolean(),
+});
+export type BoardCell = v.InferOutput<typeof BoardCell>;
+
+// --- Phase 4: WinningLine object (WIN-02, CONTEXT D-06/D-14) ---
+// Broadcast within winDeclared; also used client-side by WinLineIcon and EndScreen.
+export const WinningLine = v.object({
+  type: v.picklist(["row", "col", "diagonal"]),
+  index: v.pipe(v.number(), v.integer(), v.minValue(0)),
+});
+export type WinningLine = v.InferOutput<typeof WinningLine>;
+
+export const RoomState = v.object({
+  code: v.string(),
+  phase: v.union([v.literal("lobby"), v.literal("playing"), v.literal("ended")]),
+  hostId: v.nullable(v.string()),
+  players: v.array(Player),
+  words: v.array(WordEntry),
+  usedPacks: v.array(v.string()),
+  // Phase 5 additions (RESI-03/05): winner info for syncResponse in ended phase
+  winnerId: v.optional(v.nullable(v.string())),
+  winnerName: v.optional(v.nullable(v.string())),
+});
+export type RoomState = v.InferOutput<typeof RoomState>;
+
+export const ClientMessage = v.variant("type", [
+  v.object({
+    type: v.literal("hello"),
+    playerId: v.pipe(v.string(), v.minLength(1)),
+    displayName: v.pipe(v.string(), v.minLength(1), v.maxLength(20)),
+  }),
+  v.object({ type: v.literal("ping") }),
+  v.object({
+    type: v.literal("submitWord"),
+    text: v.pipe(v.string(), v.trim(), v.minLength(1), v.maxLength(30)),
+  }),
+  v.object({
+    type: v.literal("removeWord"),
+    wordId: v.string(),
+  }),
+  v.object({
+    type: v.literal("loadStarterPack"),
+    pack: v.picklist(["corporate-classics", "agile", "it-jargon"]),
+  }),
+  v.object({ type: v.literal("startGame") }),
+  v.object({
+    type: v.literal("markWord"),
+    cellId: v.pipe(v.string(), v.minLength(1)),
+  }),
+  // Phase 4: host-only request to return room to lobby after a win (D-09/D-13)
+  v.object({ type: v.literal("startNewGame") }),
+  // Phase 5 (RESI-03/06): client requests full state snapshot from server
+  v.object({ type: v.literal("syncRequest") }),
+]);
+export type ClientMessage = v.InferOutput<typeof ClientMessage>;
+
+export const ServerMessage = v.variant("type", [
+  v.object({ type: v.literal("roomState"), state: RoomState }),
+  v.object({ type: v.literal("playerJoined"), player: Player }),
+  v.object({ type: v.literal("playerLeft"), playerId: v.string() }),
+  v.object({ type: v.literal("error"), code: v.string(), message: v.optional(v.string()) }),
+  v.object({ type: v.literal("pong") }),
+  v.object({ type: v.literal("wordAdded"), word: WordEntry }),
+  v.object({ type: v.literal("wordRemoved"), wordId: v.string() }),
+  v.object({ type: v.literal("gameStarted") }),
+  v.object({ type: v.literal("boardAssigned"), cells: v.array(BoardCell) }),
+  v.object({
+    type: v.literal("wordMarked"),
+    playerId: v.pipe(v.string(), v.minLength(1)),
+    markCount: v.pipe(v.number(), v.integer(), v.minValue(0)),
+    cellId: v.pipe(v.string(), v.minLength(1)),
+  }),
+  // Phase 4 (WIN-02, D-14): broadcast to every player when a line completes.
+  v.object({
+    type: v.literal("winDeclared"),
+    winnerId: v.pipe(v.string(), v.minLength(1)),
+    winnerName: v.pipe(v.string(), v.minLength(1)),
+    winningLine: WinningLine,
+    winningCellIds: v.array(v.string()),
+    winningWords: v.array(v.string()),
+    gridSize: v.picklist([3, 4, 5]),
+  }),
+  // Phase 4 (WIN-05, D-09/D-10/D-14): broadcast when host resets to lobby.
+  v.object({ type: v.literal("gameReset") }),
+  // Phase 5 (RESI-02/03/05): reconnect + host failover protocol.
+  // Win fields are null/empty when phase !== "ended"; populated when phase === "ended"
+  // so a player reconnecting during the ended phase sees the EndScreen (RESI-03 gap-04).
+  v.object({
+    type: v.literal("syncResponse"),
+    state: RoomState,
+    board: v.nullable(v.array(BoardCell)),
+    markedCellIds: v.array(v.string()),
+    winningLine: v.nullable(WinningLine),
+    winningCellIds: v.array(v.string()),
+    winningWords: v.array(v.string()),
+    gridSize: v.nullable(v.picklist([3, 4, 5])),
+  }),
+  v.object({
+    type: v.literal("playerDisconnected"),
+    playerId: v.string(),
+  }),
+  v.object({
+    type: v.literal("playerReconnected"),
+    playerId: v.string(),
+    isHost: v.boolean(),
+  }),
+  v.object({
+    type: v.literal("hostChanged"),
+    newHostId: v.string(),
+  }),
+]);
+export type ServerMessage = v.InferOutput<typeof ServerMessage>;
+
+// Kebab-cased binding name — must match wrangler.jsonc durable_objects binding name.
+// See RESEARCH.md Pitfall 6.
+export const PARTY_NAME = "game-room";
+
+// Minimum word-pool size required to start a game (IN-02).
+// Enforced on the server (startGame handler) and used on the client (canStart derived).
+// Single source of truth — change here only.
+export const MIN_WORDS_TO_START = 5;
