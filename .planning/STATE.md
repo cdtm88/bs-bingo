@@ -1,11 +1,11 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: v1.0 — Bullshit Bingo
+milestone_name: v1.0 MVP
 status: complete
-stopped_at: v1.0 shipped — all 8 phases complete, docs generated, CI green, 432 tests passing
-last_updated: "2026-04-19T18:00:00.000Z"
-last_activity: 2026-04-19 -- v1.0 milestone closed
+stopped_at: v1.0 shipped — all 8 phases complete, 432 tests passing
+last_updated: "2026-04-21T15:14:36.601Z"
+last_activity: 2026-04-21
 progress:
   total_phases: 8
   completed_phases: 8
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-17)
 
 **Core value:** Players can join a live game, mark off buzzwords as they're said, and race to be the first to call "Bingo"
-**Current focus:** Phase 08 — add-logos-to-the-bullshit-versions-home-page-win-page-and-lo
+**Current focus:** v1.0 complete — planning next milestone
 
 ## Current Position
 
 Phase: 08 (add-logos-to-the-bullshit-versions-home-page-win-page-and-lo) — EXECUTING
 Plan: 1 of 4
 Status: Ready to execute
-Last activity: 2026-04-19 -- Phase 1 planning complete
+Last activity: 2026-04-21
 
 Progress: [████████░░] 84% of mapped phases 1-4 complete; Phase 5 plans ready
 
@@ -97,11 +97,13 @@ None — Phase 5 fully planned, ready to execute.
 
 ## Deferred Items
 
-Items acknowledged and carried forward from previous milestone close:
+Items acknowledged and deferred at milestone close on 2026-04-20:
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| *(none)* | | | |
+| debug | phase5-banner-and-host-failover | open (no resolved file) | 2026-04-20 |
+| debug | start-game-button-no-board | open (no resolved file) | 2026-04-20 |
+| quick | 20260418-swap-sales-it-jargon | open (PLAN only, no SUMMARY) | 2026-04-20 |
 
 ## Session Continuity
 
