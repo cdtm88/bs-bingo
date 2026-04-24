@@ -38,7 +38,7 @@
       src={isWinner ? "/bull-win.png" : "/bull-lose.png"}
       alt=""
       aria-hidden="true"
-      class="end-screen-bull-img w-full max-w-[320px] sm:max-w-[400px] object-contain landscape:shrink-0 landscape:self-center"
+      class="end-screen-bull-img w-full max-w-[320px] sm:max-w-[400px] object-contain landscape:shrink-0 landscape:self-start"
     />
   {/if}
 
