@@ -32,15 +32,17 @@
   const isNsfw = $derived(theme.current === "nsfw");
 </script>
 
-<section class="flex flex-col items-center text-center gap-4 pt-2 pb-12">
+<section class="flex flex-col items-center text-center gap-4 pt-2 pb-12 landscape:flex-row landscape:items-start landscape:text-left landscape:gap-6 landscape:pt-0 landscape:pb-2">
   {#if isNsfw}
     <img
       src={isWinner ? "/bull-win.png" : "/bull-lose.png"}
       alt=""
       aria-hidden="true"
-      class="w-full max-w-[320px] sm:max-w-[400px] object-contain"
+      class="end-screen-bull-img w-full max-w-[320px] sm:max-w-[400px] object-contain landscape:shrink-0 landscape:self-center"
     />
   {/if}
+
+  <div class="flex flex-col items-center gap-4 text-center landscape:flex-1 landscape:items-start landscape:text-left landscape:overflow-y-auto landscape:max-h-[calc(100svh_-_3.5rem_-_1rem)]">
   {#if isWinner}
     <h1
       class="font-display text-[40px] sm:text-[56px] font-semibold text-[var(--color-accent)] tracking-[0.02em] leading-[1.1]"
@@ -65,7 +67,7 @@
   </p>
 
   {#if winningWords.length > 0}
-    <div class="flex flex-wrap justify-center gap-2" aria-label="Winning words">
+    <div class="flex flex-wrap justify-center gap-2 landscape:justify-start" aria-label="Winning words">
       {#each winningWords as word}
         <span
           class="px-3 py-1.5 rounded-full text-sm font-semibold
@@ -82,7 +84,7 @@
   {/if}
 
   {#if isHost}
-    <div class="flex flex-col items-center gap-2 w-full sm:w-auto">
+    <div class="flex flex-col items-center gap-2 w-full sm:w-auto landscape:items-start">
       <Button variant="primary" onclick={onStartNewGame}>
         {#snippet children()}{copy.playAgain}{/snippet}
       </Button>
@@ -95,4 +97,5 @@
       {copy.endWaitingForHost}
     </p>
   {/if}
+  </div>
 </section>

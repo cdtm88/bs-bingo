@@ -121,6 +121,9 @@
   /* Board header (BULL / BINGO letters): hides to give board its full calculated height */
   [data-testid="board-header"] { display: none; }
 
+  /* End screen bull mascot: constrain for two-column landscape layout */
+  .end-screen-bull-img { max-width: 180px; }
+
   /* Board grid: fill full width, distribute rows evenly across available height.
      Overrides the aspect-square on cells so tiles become wide rectangles — fewer
      line breaks and better use of landscape horizontal space. */
