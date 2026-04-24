@@ -173,12 +173,12 @@
   });
 </script>
 
-<main class="min-h-screen bg-[var(--color-bg)] text-[var(--color-ink-primary)] px-4 py-8 md:py-12">
-  <div class="mx-auto max-w-[640px] flex flex-col gap-8">
+<main class="min-h-screen bg-[var(--color-bg)] text-[var(--color-ink-primary)] px-4 py-8 md:py-12 landscape:py-2 landscape:px-2">
+  <div class="mx-auto max-w-[640px] flex flex-col gap-8 landscape:max-w-none">
     {#if phase === "playing"}
-      <section class="flex flex-col gap-6">
+      <section class="flex flex-col gap-6 landscape:gap-0">
         <!-- Players strip with peer mark counts (BOAR-06 — D-07) -->
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2 landscape:hidden">
           <h2 class="text-sm font-semibold text-[var(--color-ink-secondary)]">
             Players · {playerCount}
           </h2>
@@ -193,11 +193,13 @@
         </div>
 
         <!-- Board (BOAR-04, BOAR-05, BOAR-07) -->
-        <Board
-          cells={store?.board ?? null}
-          markedCellIds={store?.markedCellIds ?? new Set()}
-          onToggle={(cellId) => store?.toggleMark(cellId)}
-        />
+        <div class="landscape:w-[calc(100svh_-_3.5rem_-_1rem)] landscape:mx-auto">
+          <Board
+            cells={store?.board ?? null}
+            markedCellIds={store?.markedCellIds ?? new Set()}
+            onToggle={(cellId) => store?.toggleMark(cellId)}
+          />
+        </div>
       </section>
     {:else if phase === "ended"}
       {#if store?.winner && store?.winningLine}
@@ -215,9 +217,10 @@
         />
       {/if}
     {:else}
+      <div class="flex flex-col gap-8 landscape:flex-row landscape:gap-4 landscape:items-start landscape:overflow-hidden">
       <!-- Room code + share -->
       <header
-        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-divider)]"
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-divider)] landscape:shrink-0 landscape:w-56 landscape:flex-col landscape:justify-start"
       >
         <div>
           <p class="text-sm font-semibold text-[var(--color-ink-secondary)]">Room code</p>
@@ -251,6 +254,7 @@
         </div>
       </header>
 
+      <div class="flex flex-col gap-8 landscape:gap-4 landscape:flex-1 landscape:overflow-y-auto landscape:max-h-[calc(100svh_-_3.5rem_-_1rem)]">
       <!-- Add word + start controls (always visible above word pool) -->
       <section class="flex flex-col gap-4">
         <div class="flex gap-2">
@@ -344,6 +348,8 @@
         playerId={myPlayerId}
         onDelete={removeWord}
       />
+      </div><!-- end right column -->
+      </div><!-- end two-column wrapper -->
     {/if}
   </div>
 </main>

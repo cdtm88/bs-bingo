@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant landscape (@media (orientation: landscape));
+
 @theme {
   --color-bg:            #0F0F14;
   --color-surface:       #1A1A23;
