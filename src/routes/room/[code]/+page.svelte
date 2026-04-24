@@ -220,7 +220,7 @@
       <div class="flex flex-col gap-8 landscape:flex-row landscape:gap-4 landscape:items-start landscape:overflow-hidden">
       <!-- Room code + share -->
       <header
-        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-divider)] landscape:shrink-0 landscape:w-56 landscape:flex-col landscape:justify-start landscape:overflow-hidden"
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-divider)] landscape:shrink-0 landscape:w-56 landscape:flex-col landscape:justify-start landscape:overflow-hidden landscape:self-stretch"
       >
         <div>
           <p class="text-sm font-semibold text-[var(--color-ink-secondary)]">Room code</p>
@@ -230,7 +230,7 @@
             {data.code}
           </p>
         </div>
-        <div class="flex flex-col gap-2 w-[148px] shrink-0">
+        <div class="flex flex-col gap-2 w-[148px] shrink-0 landscape:w-full">
           <Button variant="secondary" class="w-full" onclick={copyCode} aria-label="Copy room code">
             {#snippet children()}
               {#if copyCodeLabel === "Copied"}
@@ -251,6 +251,24 @@
               {copyLinkLabel}
             {/snippet}
           </Button>
+        </div>
+
+        <!-- Landscape only: start/wait pinned to bottom of left card -->
+        <div class="hidden landscape:flex landscape:flex-col landscape:mt-auto landscape:gap-2">
+          {#if iAmHost}
+            <Button variant="primary" onclick={startGame} disabled={!canStart} class="w-full">
+              {#snippet children()}
+                <Play size={16} />
+                {copy.startGame}
+              {/snippet}
+            </Button>
+          {:else}
+            {#if !hostIsPresent}
+              <p class="text-sm text-[var(--color-destructive)]">The host left. Waiting to reconnect…</p>
+            {:else}
+              <p class="text-sm text-[var(--color-ink-secondary)]">{waitingForHost(hostName)}</p>
+            {/if}
+          {/if}
         </div>
       </header>
 
@@ -291,24 +309,26 @@
 
         <GridProgress {wordCount} isHost={iAmHost} {hostName} />
 
-        {#if iAmHost}
-          <Button variant="primary" onclick={startGame} disabled={!canStart}>
-            {#snippet children()}
-              <Play size={16} />
-              {copy.startGame}
-            {/snippet}
-          </Button>
-        {:else}
-          {#if !hostIsPresent}
-            <p class="text-base text-[var(--color-destructive)]">
-              The host left. Waiting for them to reconnect…
-            </p>
+        <div class="landscape:hidden">
+          {#if iAmHost}
+            <Button variant="primary" onclick={startGame} disabled={!canStart}>
+              {#snippet children()}
+                <Play size={16} />
+                {copy.startGame}
+              {/snippet}
+            </Button>
           {:else}
-            <p class="text-base text-[var(--color-ink-secondary)]">
-              {waitingForHost(hostName)}
-            </p>
+            {#if !hostIsPresent}
+              <p class="text-base text-[var(--color-destructive)]">
+                The host left. Waiting for them to reconnect…
+              </p>
+            {:else}
+              <p class="text-base text-[var(--color-ink-secondary)]">
+                {waitingForHost(hostName)}
+              </p>
+            {/if}
           {/if}
-        {/if}
+        </div>
       </section>
 
       <!-- Players compact chips -->
