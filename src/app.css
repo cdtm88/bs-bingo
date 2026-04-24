@@ -120,4 +120,15 @@
 
   /* Board header (BULL / BINGO letters): hides to give board its full calculated height */
   [data-testid="board-header"] { display: none; }
+
+  /* Board grid: fill full width, distribute rows evenly across available height.
+     Overrides the aspect-square on cells so tiles become wide rectangles — fewer
+     line breaks and better use of landscape horizontal space. */
+  [data-testid="board-grid"] {
+    height: calc(100svh - 3.5rem - 1rem);
+    grid-auto-rows: 1fr;
+  }
+  [data-testid="board-grid"] > * {
+    aspect-ratio: auto;
+  }
 }

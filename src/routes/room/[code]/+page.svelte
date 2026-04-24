@@ -193,7 +193,7 @@
         </div>
 
         <!-- Board (BOAR-04, BOAR-05, BOAR-07) -->
-        <div class="landscape:w-[calc(100svh_-_3.5rem_-_1rem)] landscape:mx-auto">
+        <div class="landscape:w-full">
           <Board
             cells={store?.board ?? null}
             markedCellIds={store?.markedCellIds ?? new Set()}
