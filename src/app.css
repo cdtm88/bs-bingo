@@ -102,3 +102,22 @@
   .dauber-stamp { animation: none; opacity: 0.72; }
   .dauber-wrap::after { animation: none; }
 }
+
+/* Landscape mobile overrides — defeat sm: breakpoint conflicts (sm triggers at 640px,
+   landscape iPhones are 667–932px wide so both conditions are true simultaneously).
+   Writing explicit @media rules here guarantees these win over Tailwind sm: utilities
+   via CSS source order (all Tailwind utilities are emitted by the @import above). */
+@media (orientation: landscape) {
+  /* Home page: remove portrait-only top padding so hero is visible */
+  .home-main { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+  /* Lobby: room code at sm:text-[56px] overflows the 224px left panel — cap it */
+  .room-code-display { font-size: 1.75rem; line-height: 1.1; }
+
+  /* Logo hero (NSFW): bull image + title too tall for landscape two-column layout */
+  .logo-hero-bull-img { max-width: 140px; }
+  .logo-hero-bull-title { font-size: 1.75rem; }
+
+  /* Board header (BULL / BINGO letters): hides to give board its full calculated height */
+  [data-testid="board-header"] { display: none; }
+}

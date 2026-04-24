@@ -173,7 +173,7 @@
   });
 </script>
 
-<main class="min-h-screen bg-[var(--color-bg)] text-[var(--color-ink-primary)] px-4 py-8 md:py-12 landscape:py-2 landscape:px-2">
+<main class="min-h-screen bg-[var(--color-bg)] text-[var(--color-ink-primary)] px-4 py-8 md:py-12 landscape:py-2 landscape:px-2 landscape:overflow-x-hidden">
   <div class="mx-auto max-w-[640px] flex flex-col gap-8 landscape:max-w-none">
     {#if phase === "playing"}
       <section class="flex flex-col gap-6 landscape:gap-0">
@@ -220,12 +220,12 @@
       <div class="flex flex-col gap-8 landscape:flex-row landscape:gap-4 landscape:items-start landscape:overflow-hidden">
       <!-- Room code + share -->
       <header
-        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-divider)] landscape:shrink-0 landscape:w-56 landscape:flex-col landscape:justify-start"
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-divider)] landscape:shrink-0 landscape:w-56 landscape:flex-col landscape:justify-start landscape:overflow-hidden"
       >
         <div>
           <p class="text-sm font-semibold text-[var(--color-ink-secondary)]">Room code</p>
           <p
-            class="font-display text-[40px] sm:text-[56px] font-semibold tracking-[0.1em] text-[var(--color-accent)] leading-[1.1]"
+            class="room-code-display font-display text-[40px] sm:text-[56px] font-semibold tracking-[0.1em] text-[var(--color-accent)] leading-[1.1]"
           >
             {data.code}
           </p>

@@ -13,8 +13,8 @@
 {#if size === "hero"}
   {#if isNsfw}
     <header class="text-center flex flex-col items-center">
-      <img src="/bull-logo.png" alt="" aria-hidden="true" class="w-full max-w-[320px] sm:max-w-[400px] object-contain" />
-      <h1 class="font-display text-[40px] sm:text-[56px] font-semibold leading-[1.1]">
+      <img src="/bull-logo.png" alt="" aria-hidden="true" class="logo-hero-bull-img w-full max-w-[320px] sm:max-w-[400px] object-contain" />
+      <h1 class="logo-hero-bull-title font-display text-[40px] sm:text-[56px] font-semibold leading-[1.1]">
         {copy.brand}<span class="text-[var(--color-accent)]">.</span>
       </h1>
     </header>

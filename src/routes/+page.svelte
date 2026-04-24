@@ -80,10 +80,13 @@
 </script>
 
 <main
-  class="min-h-screen bg-[var(--color-bg)] text-[var(--color-ink-primary)] flex flex-col items-center px-4 pb-10 {isNsfw ? 'justify-start pt-2' : 'justify-start pt-[230px]'}"
+  class="home-main min-h-screen bg-[var(--color-bg)] text-[var(--color-ink-primary)] flex flex-col items-center px-4 pb-10 {isNsfw ? 'justify-start pt-2' : 'justify-start pt-[230px]'}"
 >
-  <div class="w-full max-w-[480px] flex flex-col gap-4">
-    <Logo size="hero" />
+  <div class="w-full max-w-[480px] flex flex-col gap-4 landscape:flex-row landscape:max-w-none landscape:gap-8 landscape:items-center landscape:h-[100svh]">
+    <div class="landscape:shrink-0 landscape:flex landscape:items-center landscape:justify-center">
+      <Logo size="hero" />
+    </div>
+    <div class="flex flex-col gap-4 landscape:flex-1 landscape:max-w-[400px] landscape:justify-center">
     <p class="text-[var(--color-ink-secondary)] text-center">
       {copy.homeTagline}
     </p>
@@ -124,6 +127,7 @@
         {/snippet}
       </Button>
     </form>
+    </div><!-- end right column -->
   </div>
 
   <Modal
