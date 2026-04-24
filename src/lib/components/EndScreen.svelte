@@ -60,14 +60,14 @@
     </h1>
   {/if}
 
-  <WinLineIcon {gridSize} {winningLine} />
+  <div class="landscape:hidden"><WinLineIcon {gridSize} {winningLine} /></div>
 
   <p class="text-base text-[var(--color-ink-secondary)]">
     {isWinner ? copy.winnerCallout : ""} {winLineLabel}{isWinner ? copy.winLineSuffixWinner : copy.winLineSuffixNonWinner}
   </p>
 
   {#if winningWords.length > 0}
-    <div class="flex flex-wrap justify-center gap-2 landscape:justify-start" aria-label="Winning words">
+    <div class="flex flex-wrap justify-center gap-2 landscape:flex-nowrap landscape:overflow-x-auto landscape:justify-start" aria-label="Winning words">
       {#each winningWords as word}
         <span
           class="px-3 py-1.5 rounded-full text-sm font-semibold
@@ -84,7 +84,7 @@
   {/if}
 
   {#if isHost}
-    <div class="flex flex-col items-center gap-2 w-full sm:w-auto landscape:items-start">
+    <div class="flex flex-col items-center gap-2 w-full sm:w-auto landscape:items-end landscape:self-end">
       <Button variant="primary" onclick={onStartNewGame}>
         {#snippet children()}{copy.playAgain}{/snippet}
       </Button>
