@@ -55,7 +55,7 @@
   <input
     id={inputId}
     class={inputClasses}
-    {value}
+    bind:value={value}
     {maxlength}
     {placeholder}
     {autofocus}
